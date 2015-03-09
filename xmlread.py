@@ -6,7 +6,7 @@ import pylab
 ######################################################
 #  Python file to read xml data and plot it in a graph
 #  The figures are saved in a pdf file
-#
+#  To run it: $ ./waf --pyrun "xmlread.py NAME_OF_XML_FILE"
 ######################################################
 
 
@@ -15,13 +15,14 @@ try:
 except ImportError:
     from xml.etree import ElementTree
 
+#Parse elements from xml
 et = ElementTree.parse(sys.argv[1]);
 bitrates = []
 losses = []
 delays = []
 
 for flow in et.findall("FlowStats/Flow"):
-   # filter out OLSR
+   #Get flowIds information
    for tpl in et.findall("Ipv4FlowClassifier/Flow" ):
        if tpl.get('flowId') == flow.get('flowId'):
            break
@@ -40,6 +41,7 @@ for flow in et.findall("FlowStats/Flow"):
        bitrates.append(8*long(float(flow.get('rxBytes'))/duration*1e-3))
        delays.append(float(flow.get('delaySum')[:-2])*1e-9/rxPackets)
 
+#Plot graphics
 pylab.subplot(311)
 pylab.hist(bitrates, bins=40)
 pylab.xlabel("Flow bitrate (bit/s)")
@@ -55,6 +57,7 @@ pylab.hist(delays, bins = 10)
 pylab.xlabel("Delay(s)")
 pylab.ylabel("Number of flows")
 
+#Save data in a pdf file 
 pylab.subplots_adjust(hspace=0.4)
 pylab.savefig("results.pdf")
 
