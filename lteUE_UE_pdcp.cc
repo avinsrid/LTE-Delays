@@ -55,7 +55,7 @@ int main (int argc, char *argv[])
   LogComponentEnable("UdpClient",LOG_LEVEL_ALL);
   LogComponentEnable("PacketSink", LOG_LEVEL_ALL);
   LogComponentEnable("UdpServer",LOG_LEVEL_ALL);
-  Config::SetDefault ("ns3::LtePdcp::pdcp_delay", UintegerValue(80));
+  Config::SetDefault ("ns3::LtePdcp::PDCPDelay", UintegerValue(80));
   
   //Set value
   uint16_t numberOfNodes = 2;
