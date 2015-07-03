@@ -100,7 +100,7 @@ LtePdcp::GetTypeId (void)
                      MakeTraceSourceAccessor (&LtePdcp::m_rxPdu),
                      "ns3::LtePdcp::PduRxTracedCallback")
     /****/
-    .AddAttribute ("PDCP Delay",
+    .AddAttribute ("PDCPDelay",
                    "PDCP Delay",
                    UintegerValue (50),
                    MakeUintegerAccessor (&LtePdcp::pdcp_delay),
